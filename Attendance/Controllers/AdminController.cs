@@ -42,25 +42,7 @@ namespace Attendance.Controllers
              {
                  return HttpNotFound();
              }
-            if(employees.Id ==0)
-                _context.employees.Add(employees);
-            
-
-            else
-            {
-                var EmployeeInDb = _context.employees.Single(c => c.Id == employees.Id);
-
-
-                EmployeeInDb.Name = employees.Name;
-                EmployeeInDb.Email = employees.Email;
-                EmployeeInDb.Password = employees.Password;
-                EmployeeInDb.ConfirmPassword =employees.ConfirmPassword;
-                EmployeeInDb.salary =employees.salary;
-                EmployeeInDb.joiningDate = employees.joiningDate;
-                EmployeeInDb.BirthDate = employees.BirthDate;
-
-
-            }
+                _context.employees.Add(employees);   
             _context.SaveChanges();
             return RedirectToAction("New", "Admin");
         }
