@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Options</h2>
+<div class="form-group">
+
+@Html.ActionLink("Add New Employee", "New", "Admin", null, new { @class = "btn btn-primary btn-large" })
+@Html.ActionLink("Attendance Report", "EmployeeReport", "Admin", null, new { @class = "btn btn-primary btn-large" })
+</div>

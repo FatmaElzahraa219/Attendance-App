@@ -1,0 +1,30 @@
+﻿@model Attendance.Models.Login
+@{
+    ViewBag.Title = "Loginload";
+}
+
+<h2>Log-In</h2>
+@using (Html.BeginForm("Login","Employee"))
+{
+    @Html.ValidationSummary(true, "Please fix the following Errors. ")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password)
+        @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Password)
+
+    </div>
+    @Html.HiddenFor(m => m.id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">LogIn</button>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Attendance.Models.EmployeeAttendance>
+@{
+    ViewBag.Title = "EmployeeReport";
+}
+
+<h2>Monthly Attendance</h2>
+<table class="table table-bordered" id="Attendance">
+    <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Delayed Days</th>
+            <th>Absence Days</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach (var emp in Model)
+        {
+
+            <tr>
+                <td>@emp.employeeName</td>
+                <td>@emp.delay</td>
+                <td>@emp.Present</td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#Attendance").DataTable();
+        });
+                </script>
+    }
+    
+

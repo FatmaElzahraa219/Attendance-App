@@ -1,0 +1,10 @@
+﻿@model Attendance.Models.Attendances
+@{
+    ViewBag.Title = "checkInOut";
+}
+
+<h2>Attendance</h2>
+
+
+@Html.ActionLink("CheckIn", "checkIn", "Employee", null, new { @class = "btn btn-primary btn-large" })
+@Html.ActionLink("CheckOut", "CheckOut", "Employee", null, new { @class = "btn btn-primary btn-large" })
