@@ -64,6 +64,8 @@ namespace Attendance.Controllers
             _context.SaveChanges();
             return RedirectToAction("New", "Admin");
         }
+        [Authorize(Roles = "Admin")]
+        
         public ActionResult EmployeeReport()
         {
             var Month = DateTime.Now.Month;
