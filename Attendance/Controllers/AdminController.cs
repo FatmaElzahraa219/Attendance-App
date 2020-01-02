@@ -50,17 +50,16 @@ namespace Attendance.Controllers
         
     public ActionResult EmployeeReport()
         {
-            var Month = DateTime.Now.Month;
+         var Month = DateTime.Now.Month;
             List<EmployeeAttendance> empWithDate = new List<EmployeeAttendance>();
             var attendGroupbyId = (from s in _context.attendances.Include(a => a.Employees)
                .Where(a => a.DateOfDay.Month == Month)
-            
                                    group s by s.EmployeeID).ToList();
-          
+
 
             if (attendGroupbyId.Count == 0)
                 return HttpNotFound();
-         //  attendGroupbyId = att
+            //  attendGroupbyId = att
             foreach (var idgroup in attendGroupbyId)
             {
                 var disdays = idgroup.ToList();
@@ -71,27 +70,27 @@ namespace Attendance.Controllers
                 var comingdays = result.Count();
                 var workdays = (alldays / 7);
 
-                if (alldays >28)
-                workdays = workdays + 1;
-                for (int i=1;i<=workdays ;i++)
+                if (alldays > 28)
+                    workdays = workdays + 1;
+                for (int i = 1; i <= workdays; i++)
                 {
                     if (comingdays >= 5 && alldays >= 7)
                     {
                         comingdays -= 5;
-                        alldays-= 7;
+                        alldays -= 7;
                     }
-                    else if(alldays >=7)
+                    else if (alldays >= 7)
                     {
                         alldays -= 2;
 
                     }
 
-                    
+
                 }
 
 
                 absent = alldays - comingdays;
-                
+
                 var count = 0;
 
                 var name = "";
@@ -108,15 +107,7 @@ namespace Attendance.Controllers
                         name = _context.employees.Where(a => a.Id == s.EmployeeID).Select(a => a.Name).Single();
 
 
-                        var listitem = new EmployeeAttendance()
-                        {
-                            id = (int)idgroup.Key,
-                            Present = absent,
-                            delay = count,
-                            employeeName = name
 
-                        };
-                        empWithDate.Add(listitem);
                         if (j == result.Count() - 1)
                             break;
                         j++;
@@ -126,6 +117,15 @@ namespace Attendance.Controllers
 
 
                 }
+                var listitem = new EmployeeAttendance()
+                {
+                    id = (int)idgroup.Key,
+                    Present = absent,
+                    delay = count,
+                    employeeName = name
+
+                };
+                empWithDate.Add(listitem);
             }
             return View(empWithDate);
         }
