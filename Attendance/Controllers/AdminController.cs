@@ -50,7 +50,7 @@ namespace Attendance.Controllers
         
     public ActionResult EmployeeReport()
         {
-            var Month = DateTime.Now.Day;
+            var Month = DateTime.Now.Month;
             List<EmployeeAttendance> empWithDate = new List<EmployeeAttendance>();
             var attendGroupbyId = (from s in _context.attendances.Include(a => a.Employees)
                .Where(a => a.DateOfDay.Month == Month)
